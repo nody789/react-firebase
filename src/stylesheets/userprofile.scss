@@ -1,0 +1,39 @@
+.user-profile {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .user-profile-card {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .user-profile-header {
+    text-align: center;
+  }
+  
+  .user-profile-avatar {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 15px;
+  }
+  
+  .user-profile-details p {
+    margin-bottom: 10px;
+  }
+  
+  .user-profile-form .form-control {
+    border-radius: 10px;
+  }
+  
+  .user-profile-form button {
+    margin-right: 10px;
+  }
+  
+  .user-profile-form textarea {
+    resize: none;
+  }
+  

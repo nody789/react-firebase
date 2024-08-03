@@ -1,0 +1,64 @@
+// Messages.scss
+
+.container {
+    margin-top: 50px;
+  }
+  
+  .message-board {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .message-input {
+    margin-bottom: 20px;
+  
+    .user-info {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+    .message-time {
+        font-size: 0.9rem;
+        color: #6c757d;
+        margin-top: 5px;
+      }
+    .input-group {
+      .form-control {
+        height: 45px;
+        border-radius: 0;
+      }
+  
+      .btn-primary {
+        height: 45px;
+        border-radius: 0;
+      }
+    }
+  }
+  .text-muted {
+    font-size: 0.875rem;
+  }
+
+  p {
+    margin-top: 0.5rem;
+  }
+  .list-group-item {
+    border: none;
+    border-bottom: 1px solid #e9ecef;
+    padding: 15px 20px;
+  
+    &:last-child {
+      border-bottom: none;
+    }
+  
+    .btn-danger {
+      padding: 5px 10px;
+    }
+  }
+  
+  .btn-secondary {
+    width: 100%;
+    margin-top: 20px;
+    font-size: 1rem;
+  }
+  

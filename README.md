@@ -1,70 +1,42 @@
-# Getting Started with Create React App
+# React Blog Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+這是一個使用 React 和 Firebase 的簡單部落格應用，支持用戶登入、發佈文章、留言和刪除留言等功能。以下是實現這些功能所用到的技巧和步驟。
 
-## Available Scripts
+## 功能概覽
 
-In the project directory, you can run:
+1. **用戶登入** - 支持 Google、Facebook、 和電子郵件/密碼登入。
+2. **發佈文章** - 用戶可以撰寫和發佈文章，文章中可以包含圖片。
+3. **留言** - 用戶可以對文章進行留言，並查看其他用戶的留言。
+4. **刪除留言** - 用戶只能刪除自己發佈的留言。
 
-### `npm start`
+## 
+- **React** - 前端框架。
+- **Firebase** - 後端服務（身份驗證、Firestore、儲存）。
+- **Bootstrap 5** - 用於樣式和布局。
+## 使用技巧
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 1. 用戶登入
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- 使用 Firebase 的身份驗證服務，支持多種登入方式（Google、Facebook、 和電子郵件/密碼）。
+- 在 `firebase.js` 中配置 Firebase，並在 React 應用中使用 Firebase 提供的 API 進行身份驗證。
 
-### `npm test`
+### 2. 發佈文章
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 在用戶發佈文章時，將文章內容和圖片上傳到 Firebase Firestore 和 Firebase Storage。
+- 使用 `addDoc` 方法將文章保存到 Firestore。
+- 使用 `serverTimestamp` 來記錄文章發佈時間。
 
-### `npm run build`
+### 3. 留言功能
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- 使用 Firestore 的 `collection` 和 `addDoc` 方法來新增留言。
+- 使用 `onSnapshot` 監聽留言的變化，即時更新 UI。
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 4. 刪除留言
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- 用戶只能刪除自己發佈的留言。使用 Firebase Firestore 的 `deleteDoc` 方法來刪除留言。
+- 在刪除操作前，先檢查留言的擁有者是否為當前用戶。
 
-### `npm run eject`
+### 5. 圖片顯示和燈箱效果
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- 使用 Bootstrap 5 的模態框來實現圖片燈箱效果，並自定義樣式以調整圖片間距。
+- 使用 `modal` 元件來顯示圖片，並在模態框中設置導航按鈕來查看圖片集。
