@@ -61,7 +61,7 @@ function Articles() {
     };
 
     useEffect(() => {
-        fetchTotalPages(); // 获取总页数
+        fetchTotalPages(); // 獲取總頁數
     }, []);
 
     useEffect(() => {

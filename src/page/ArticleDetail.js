@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { ref, deleteObject } from 'firebase/storage';
-import { doc, getDoc, collection, addDoc, query, orderBy, deleteDoc, onSnapshot, serverTimestamp } from 'firebase/firestore';
+import { doc, getDoc, collection, addDoc, deleteDoc, onSnapshot, serverTimestamp } from 'firebase/firestore';
 import { firestore, storage } from '../firebase';
 import Loading from '../components/Loading';
 import LazyLoad from 'react-lazyload';
@@ -11,7 +11,6 @@ import 'moment-timezone';
 import 'moment/locale/zh-tw';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { createAsyncMessage } from '../Silce/messageSlice';
-import MessageToast from '../components/MessageToast';
 import ImgModal from '../components/ImgModal';
 
 const ArticleDetail = ({ user }) => {
@@ -77,7 +76,7 @@ const ArticleDetail = ({ user }) => {
                 // 删除存储中的图片
                 const deleteImagePromises = imageUrls.map(async (url) => {
                     try {
-                        // 構建Firebase Storage 中图片的引用路径
+                        // 構建Firebase Storage 中圖片的引用路径
                         const imageRef = ref(storage, url);
                         await deleteObject(imageRef);
                         console.log(`圖片已删除: ${url}`);
@@ -89,7 +88,7 @@ const ArticleDetail = ({ user }) => {
                         }
                     }
                 });
-                await Promise.all(deleteImagePromises);
+                await Promise.all(deleteImagePromises);// 等待所有圖片删除完成
 
                 // 删除文章文档
                 const articleRef = doc(firestore, 'articles', id);
@@ -129,16 +128,19 @@ const ArticleDetail = ({ user }) => {
             }
         }
     };
-
+    
+    //圖片modal
     const handleImageClick = (index) => {
         setPhotoIndex(index);
         setIsModalOpen(true);
     };
-
+     
+    //上一張圖片
     const handlePrev = () => {
         setPhotoIndex((photoIndex + article.imageUrls.length - 1) % article.imageUrls.length);
     };
-
+    
+    //下一張圖片
     const handleNext = () => {
         setPhotoIndex((photoIndex + 1) % article.imageUrls.length);
     };
@@ -151,7 +153,7 @@ const ArticleDetail = ({ user }) => {
         const replyToDelete = replies.find(msg => msg.id === replyId);
 
         if (replyToDelete) {
-            // 確保用戶的 uid 與回覆中的用戶 uid 匹配
+            // 確保用戶的 uid 與回覆中的用戶 uid 一樣
             if (replyToDelete.user.uid === user.uid) {
                 try {
                     await deleteDoc(doc(firestore, 'articles', id, 'replies', replyId));
@@ -171,7 +173,6 @@ const ArticleDetail = ({ user }) => {
 
     return (
         <div className="container">
-            <MessageToast />
             <Loading isLoading={isLoading} />
             <div className='d-flex justify-content-between align-items-center'>
                 <h2>{article?.title}</h2>
@@ -249,8 +250,8 @@ const ArticleDetail = ({ user }) => {
                 </div>
             )}
             <p>{article?.content}</p>
+            <div className='message-board'>
             <h4>回覆</h4>
-            <div>
                 <input
                     value={newReply}
                     onChange={(e) => setNewReply(e.target.value)}
@@ -258,7 +259,6 @@ const ArticleDetail = ({ user }) => {
                     className="form-control mb-2"
                 />
                 <button onClick={handleReplySubmit} className="btn btn-primary mt-2">回覆</button>
-            </div>
 
             <ul className="list-group mt-5 min-vh-100">
                 {replies.map(reply => (
@@ -283,6 +283,8 @@ const ArticleDetail = ({ user }) => {
                     </li>
                 ))}
             </ul>
+            </div>
+
             <ImgModal
                 show={isModalOpen}
                 handleClose={handleClose}

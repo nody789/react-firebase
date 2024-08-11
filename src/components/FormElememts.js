@@ -25,7 +25,7 @@ export const Input = ({
           id={id}
           type={type}
           placeholder={placeholder}
-          className={`form-control ${errors[id] ? 'is-invalid' : ''}`}
+          className={`form-control mb-3 ${errors[id] ? 'is-invalid' : ''}`}
           {...register(id, rules)}
           onChange={onChange}
         />

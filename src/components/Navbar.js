@@ -1,16 +1,26 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch} from 'react-redux';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase';
+import { createAsyncMessage } from '../Silce/messageSlice';
 
 const Navbar = ({ user }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      console.log("User signed out");
-      navigate('/'); // Navigate back to the login page or home page
+      console.log('Logout successful, dispatching message');
+     
+      dispatch(createAsyncMessage({
+        success: true,
+        message: '登出成功',
+    }));
+    setTimeout(() => {
+        navigate('/');
+    }, 3000);
     } catch (error) {
       console.error("Error during sign out:", error);
     }

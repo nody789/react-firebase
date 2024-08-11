@@ -30,7 +30,6 @@ export const messageSlice = createSlice({
         },
         removeMessage(state,action){
             //這樣才是同步 加上setTimeout是非同步
-            console.log('remove:',action.payload)
             const index = state.findIndex(item=>item===action.payload);
             state.splice(index,1)
         },

@@ -6,7 +6,6 @@ import { addDoc, collection, serverTimestamp, doc, updateDoc,increment } from 'f
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { firestore, storage } from '../firebase';
 import Loading from '../components/Loading';
-import MessageToast from '../components/MessageToast';
 import { Input, Textarea } from '../components/FormElememts';
 import { createAsyncMessage } from '../Silce/messageSlice';
 
@@ -38,7 +37,7 @@ const CreatePost = ({ user }) => {
     if (title.trim() && content.trim() && images.length > 0) { // 确保标题、内容和至少一张图片存在
       setIsLoading(true);
       try {
-        // 先创建文章文档并获取文章ID
+        // 先创建文章文擋獲取文章ID
         const articleRef = await addDoc(collection(firestore, 'articles'), {
           title,
           content,
@@ -120,7 +119,6 @@ const CreatePost = ({ user }) => {
   return (
     <div className="container">
       <Loading isLoading={isLoading} />
-      <MessageToast />
       <h2>發布文章</h2>
       <form onSubmit={handleSubmit(handlePublish)}>
         <div className="mb-3">
